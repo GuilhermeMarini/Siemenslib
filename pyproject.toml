@@ -1,0 +1,47 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "siemenslib"
+version = "0.1.0"
+description = "Read what DIGSI writes into an SCL file beside the standard: SIPROTEC product codes, application templates and GOOSE applications"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "AGPL-3.0-or-later"
+license-files = ["LICENSE"]
+authors = [{ name = "Guilherme Marini" }]
+keywords = ["siemens", "siprotec", "digsi", "scl", "scd", "iec61850",
+            "goose", "protection", "relay", "commissioning"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Manufacturing",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Topic :: Scientific/Engineering",
+]
+# None. This reads XML with the standard library, and the STANDARD half of an
+# SCL file is deliberately not read here -- `sellib.scl` does that for any
+# vendor, so depending on it would buy a duplicate rather than a feature.
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0", "ruff>=0.6", "mypy>=1.11"]
+
+[project.urls]
+Homepage = "https://github.com/GuilhermeMarini/Siemenslib"
+Source = "https://github.com/GuilhermeMarini/Siemenslib"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+siemenslib = ["py.typed"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]

@@ -1,0 +1,24 @@
+__pycache__/
+*.pyc
+.venv/
+dist/
+build/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Arquivos de fabricante e de projeto: SCL dos IEDs e exportacoes do DIGSI.
+# Pesados, nao redistribuiveis, e trazem a identidade de uma instalacao real --
+# um SCD do DIGSI carrega o nome da subestacao, o da concessionaria e ate o
+# hostname da estacao de engenharia. Uma negacao aqui nomeia UM arquivo, nunca
+# um curinga: em pac-ct um `!samples/*.scd` deixou entrar um SCD nao
+# anonimizado num repositorio publico.
+*.scd
+*.SCD
+*.icd
+*.ICD
+*.cid
+*.CID
+*.iid
+*.IID

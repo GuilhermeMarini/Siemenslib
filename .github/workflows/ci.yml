@@ -1,0 +1,28 @@
+name: CI
+
+# No release workflow lives beside this one, on purpose: `Siemenslib` is taken on
+# PyPI by an unrelated project, so there is nothing safe to publish to yet.
+# When the distribution name is settled, the release workflow comes from the
+# sibling libraries -- it checks the tag against BOTH version literals before
+# it builds.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.10", "3.11", "3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: ${{ matrix.python-version }}
+      - run: pip install -e ".[dev]"
+      - run: python -m ruff check .
+      - run: python -m mypy
+      - run: python -m pytest tests/ -q
