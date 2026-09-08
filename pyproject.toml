@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "siemenslib"
-version = "0.2.0"
+version = "0.2.1"
 description = "Read what DIGSI writes into an SCL file beside the standard: SIPROTEC product codes, application templates and GOOSE applications"
 readme = "README.md"
 requires-python = ">=3.10"
@@ -30,10 +30,11 @@ classifiers = [
 # those nodes. It parses no XML of its own -- a second reader for one standard
 # format would be two things to keep right instead of one.
 #
-# The pre-release is NAMED on purpose. PEP 440 sorts 0.3.0.dev2 BEFORE 0.3.0,
-# so a plain `>=0.3.0` matches no published version today and makes siemenslib
-# uninstallable. Switch to `py61850>=0.3.0` the day the final is published.
-dependencies = ["py61850>=0.3.0.dev2"]
+# `>=0.3.0` and not `>=0.3.0.dev2`: the final is published, so the pin no longer
+# has to name a pre-release. Keep it that way -- a specifier naming a `.devN`
+# tells the resolver pre-releases are acceptable for this requirement, which
+# would keep letting a future `0.4.0.dev1` in on a fresh install.
+dependencies = ["py61850>=0.3.0"]
 
 [project.optional-dependencies]
 dev = ["pytest>=8.0", "ruff>=0.6", "mypy>=1.11"]
